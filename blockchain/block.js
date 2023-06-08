@@ -30,7 +30,13 @@ class Block {
     } while (hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty));
 
     return new this({ timestamp, lastHash, data, difficulty, nonce, hash });
-  }
+      timestamp,
+      lastHash,
+      data,
+      difficulty,
+      nonce,
+      hash: cryptoHash(timestamp, lastHash, data, nonce, difficulty)
+    });
 
   static adjustDifficulty({ originalBlock, timestamp }) {
     const { difficulty } = originalBlock;
